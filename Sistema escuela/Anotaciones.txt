@@ -1,0 +1,23 @@
+
+Anotaciones
+vamos a empezar el proyecto con srpingboot
+vamos a hacer cosas nuevas 
+
+Project: maven (el  otro es para cosas de google)
+3.14 (los otros son viejos o de prueba)
+Packaging: jar (no hace falta instalar archivos en un serividor, ya que crea uno proio?. en el otro si tengo que instalar todo en el servidor y no quiero)
+
+
+dependencias:
+-dev tools: mantiene actualizado el servidor
+-springweb: se ecnarga de crear un servidor tomcat embebido? y portatil
+-thymeleaf: me da la plantilla html
+-spring security: me pone seguridad y actualizacion para cada parte del software, no se si lo vamos a usar pero esta bueno verlo
+si quiero utiizar algo que tenga que iniciar sesion, tengo que ponerle un if a cada pagina y es un quilombo.
+con esta dependencia la seguridad pasa a ser un ASPECTO (paradigma de este siglo, cuando un grupo de lineas de codigo se repite turinariamente no hay que escribirlas, hay que programarla como un aspecto) y no un problema de programacion . me inyecta en tiempo de ejecucion el "if" que tendria que haber escrito para la seguridad.
+-aparche freemarker, envia mails de aviso a determinados usuarios (tu turno medico es en 72hs")
+-oAuth2 client: valida la cuenta contra otras redes sociales, para que ho haga falta que cree un nuevo usuario
+-SptingData: usa y mejora JPA (api de percistencia de java) creo un repositorio y por herencia el jpa me da por herencia todos los metodos. ademas no imnporta si la base de datos es cualquiera, lo resuelve para cualquier base de datos
+-mariaDB driver: puedo acceder a la base de datos de MySLQ(creada en el 93, libre por symmicrosistem, oracle compro toda la empresa. los creadores entonces copiaron todo y crearon mariaDB para que no deje de ser libre) y la de MariaDB
+-Spring Data MongoDB: base de datos documenta NO sql, esta haciendo furor
+-h2database: se puede programar como sql o no. es embebdido(cuando enciendo el proyecto me abre el servidor de base de datos que ocupa solo 2 megas) y entonces no hace falta instalar el servidor. 
