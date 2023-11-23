@@ -3,27 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Index</title>
-    <!-- Para usar bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <title>Sistema de colegio</title>
+
+    <!-- icono de libro-->
+    <link rel="icon" type="image/x-icon" href="/iconos/book.svg" />
+
+    <!-- para usar bootstrap-->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+        crossorigin="anonymous">
 
     <!-- Para usar css -->
     <link href="css/style.css" rel="stylesheet" type="text/css">
 
-    <!-- Para usar icon -->
-    <link rel="icon" type="image/svg" href="iconos/laptop.svg">
+    <!-- reloj -->
+    <link href="css/reloj.css" rel="stylesheet">
+
+    <!-- reloj -->
+    <script src="js/reloj.js"></script>
+
 </head>
-<body>
-    
+<body onload="startTime()">
+
+    <div class="container-lg bg-primary-subtle">
+		
+        <!-- navegador -->
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+
+                <!-- boton de inicio-->
+                <a class="navbar-brand text-primary" href="/">Inicio</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- hamburguesa -->
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                    <!-- botones de curso y alumnos-->
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link active text-primary"
+                            aria-current="page" href="/cursos">Cursos</a></li>
+                        <li class="nav-item"><a class="nav-link active text-primary"
+                            aria-current="page" href="/alumnos">Alumnos</a></li>
+                    </ul>
+
+                    <!-- reloj -->
+                    <div id="clockdate">
+                        <div class="clockdate-wrapper">
+                            <div id="clock"></div>
+                          </div>
+                    </div>
+
+                    <!-- Buscador -->
+                    <form class="d-flex" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search" name="buscar"
+                            aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+
+                </div>
+            </div>
+        </nav>
+
+        <!-- Titulo -->
+		<h1 class="text-center text-primary bg-secondary-subtle p-1 m-1">Sistema de colegio</h1>
+		
+        <!-- imagen -->
+        <img src="img/colegio.jpg" class="img-fluid" alt="Sistema de Colegio">
+	
+    </div>
 
     <!-- para poder usar bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
     crossorigin="anonymous"></script>
 
-    <!-- para poder usar javascript-->
+    <!-- para poder usar javascript 
     <script src="/js/config.js"></script>
+    en realidad no me sirve, por ahora, porque es para la fecha hora ip etc
+    -->
+    
 
 </body>
 </html>

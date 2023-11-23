@@ -4,26 +4,219 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alumnos</title>
-    <!-- Para usar bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
+    <!-- icono de libro-->
+    <link rel="icon" type="image/x-icon" href="/iconos/book.svg" />
+
+    <!-- para usar bootstrap-->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+        crossorigin="anonymous">
 
     <!-- Para usar css -->
     <link href="css/style.css" rel="stylesheet" type="text/css">
 
-    <!-- Para usar icon -->
-    <link rel="icon" type="image/svg" href="iconos/laptop.svg">
+    <!-- reloj -->
+    <link href="css/reloj.css" rel="stylesheet">
+
+    <!-- reloj -->
+    <script src="js/reloj.js"></script>
+
 </head>
-<body>
-    
+<body onload="startTime()">
+
+    <div class="container-lg bg-primary-subtle">
+		
+        <!-- navegador -->
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+
+                <!-- boton de inicio-->
+                <a class="navbar-brand text-primary" href="/">Inicio</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- hamburguesa -->
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                    <!-- botones de curso y alumnos-->
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link active text-primary"
+                            aria-current="page" href="/cursos">Cursos</a></li>
+                        <li class="nav-item"><a class="nav-link active text-primary"
+                            aria-current="page" href="/alumnos">Alumnos</a></li>
+                    </ul>
+
+                    <!-- reloj -->
+                    <div id="clockdate">
+                        <div class="clockdate-wrapper">
+                            <div id="clock"></div>
+                          </div>
+                    </div>
+
+                    <!-- Buscador -->
+                    <form class="d-flex" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search" name="buscar"
+                            aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+
+                </div>
+            </div>
+        </nav>
+
+        <!-- Titulo -->
+        <h1 class="text-center text-primary bg-secondary-subtle p-1 m-1">Mantenimiento de Alumnos</h1>
+
+        <!-- Formulario para poder usar el guardado -->
+        <form   class="bg-secondary-subtle formulario"
+                th:object="${alumno}" th:action="@{/saveAlumno}" method="post">
+                <!-- method="post" es mas seguro porque no queda en la url -->
+
+                <div class="mb-3 row">
+
+                    <!-- Nombre -->
+                    <div class="mb-3 row">
+                        <label for="nombre" class="col-sm-3 col-form-label text-primary">
+                            Nombre
+                        </label>
+                        <div class="col-sm-9">
+                            <input type="text" placeholder="Juan" 
+                                class="form-control text-primary" id="nombre" name="nombre"
+                                required minlength="3" maxlength="40"  th:field="*{nombre}" >
+                        </div>
+                    </div>
+
+                    <!-- Apellido -->
+                    <div class="mb-3 row">
+                        <label for="apellido" class="col-sm-3 col-form-label text-primary">
+                            Apellido
+                        </label>
+                        <div class="col-sm-9">
+                            <input type="text" placeholder="Perez" 
+                                class="form-control text-primary" id="apellido" name="apellido"
+                                required minlength="3" maxlength="40"  th:field="*{apellido}" >
+                        </div>
+                    </div>
+
+                    <!-- Edad -->
+                    <div class="mb-3 row">
+                        <label for="edad" class="col-sm-3 col-form-label text-primary">
+                            Edad
+                        </label>
+                        <div class="col-sm-9">
+                            <input type="number" placeholder="18" 
+                                class="form-control text-primary" id="edad" name="edad"
+                                required minvalue="18" maxvalue="120"  th:field="*{edad}" >
+                        </div>
+                    </div>
+
+                    <!-- Curso -->
+                    <div class="mb-3 row">
+                        <label for="idCurso" class="col-sm-3 col-form-label text-primary">
+                            Curso
+                        </label>
+                        <div class="col-sm-9">
+                            <select class="form-select text-primary" th:field="*{idCurso}"
+                                aria-label="Default select example" id="idCurso" name="idCurso"
+                                >
+                                <option value='0' selected>Seleccione Curso</option>
+                                <option th:each="alumnos: ${listaCurso}" value="${curso.id}" selected></option>
+                                <!-- +"${curso.titulo}"+", "+"${curso.profesor}"+", "+"${curso.dia}"+", "+"${curso.turno}"-->
+
+                                <!-- aca debo crear la funcion CURSOS
+
+                                <tbody>
+                                    <tr th:each="curso: ${lista}">
+                                        <th scope="row" th:text="${curso.id}"></th>
+                                        <td th:text="${curso.titulo}"></td>
+                                        <td th:text="${curso.profesor}"></td> 
+                                        <td th:text="${curso.dia}"></td>
+                                        <td th:text="${curso.turno}"></td>
+                                    </tr>
+                                </tbody>
+
+                                
+
+
+                                <option value="Mañana">Mañana</option>
+                                <option value="Tarde">Tarde</option>
+                                <option value="Noche">Noche</option>
+
+                                -->
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- Botones -->
+                    <div class="mb-3 row">
+                        <button type="reset" class="btn btn-danger col-sm-4 m-2">Borrar</button>
+                        <button type="submit" class="btn btn-success col-sm-4 m-2">Guardar</button>
+                    </div>
+
+                    <!-- Informacion-->
+                    <div class="mb-3 row">
+                        <label for="informacion" class="col-sm-3 col-form-label text-primary">
+                            Información
+                        </label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control text-primary" 
+                            id="informacion" name="informacion"
+                            readonly th:value="${mensajeAlumno}">
+                        </div>
+                    </div>
+
+                    <!-- Tabla -->
+                    <table class="table table-striped table-primary">
+                        <thead>
+                            <!-- Encabezado en negrita -->
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Apellido</th> 
+                                <th scope="col">Edad</th>
+                                <th scope="col">Curso</th>
+                            </tr>
+                        </thead>
+
+                        <!-- Dispositivos cargados en la pagina -->
+                        <tbody>
+                            <tr th:each="alumno: ${lista}">
+                                <th scope="row" th:text="${alumno.id}"></th>
+                                <td th:text="${alumno.nombre}"></td>
+                                <td th:text="${alumno.apellido}"></td> 
+                                <td th:text="${alumno.edad}"></td>
+                                <td th:text="${alumno.curso}"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+
+
+                </div>
+
+        </form>
+
+
+	</div>
 
     <!-- para poder usar bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
     crossorigin="anonymous"></script>
 
-    <!-- para poder usar javascript-->
+    <!-- para poder usar javascript 
     <script src="/js/config.js"></script>
+    en realidad no me sirve, por ahora, porque es para la fecha hora ip etc
+    -->
     
+
 </body>
 </html>

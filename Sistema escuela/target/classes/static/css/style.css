@@ -1,0 +1,18 @@
+.titulo{
+    padding: 10px;
+    margin: 5px;
+    border-radius: 20px;
+    text-align: center;
+}
+
+.formulario{
+    padding: 12px;
+    margin: 7px;
+    border-radius: 15px;
+}
+
+.logo{
+    width: 30%;
+    height: 70%;
+    margin: 5px;
+}
