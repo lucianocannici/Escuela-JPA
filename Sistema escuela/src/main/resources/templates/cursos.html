@@ -61,9 +61,9 @@
                           </div>
                     </div>
 
-                    <!-- Buscador -->
+                    <!-- Buscador --> <!-- aca poner el nombre del buscador-->
                     <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" name="buscar"
+                        <input class="form-control me-2" type="search" placeholder="Search" name="buscarTitulo" 
                             aria-label="Search">
                         <button class="btn btn-outline-success" type="submit">Search</button>
                     </form>
@@ -114,7 +114,7 @@
                         <div class="col-sm-9">
                             <select class="form-select text-primary" th:field="*{dia}"
                                 aria-label="Default select example" id="dia" name="dia">
-                                <option value='0'>Seleccione Día</option>
+                                <!-- <option value="0">Seleccione Día</option> -->
                                 <option value="LUNES">Lunes</option>
                                 <option value="MARTES">Martes</option>
                                 <option value="MIERCOLES">Miércoles</option>
@@ -132,10 +132,10 @@
                         <div class="col-sm-9">
                             <select class="form-select text-primary" th:field="*{turno}"
                                 aria-label="Default select example" id="turno" name="turno">
-                                <option value='0' selected>Seleccione Turno</option>
-                                <option value="Mañana">Mañana</option>
-                                <option value="Tarde">Tarde</option>
-                                <option value="Noche">Noche</option>
+                                <!-- <option value="0" selected>Seleccione Turno</option> -->
+                                <option value="MAÑANA">Mañana</option>
+                                <option value="TARDE">Tarde</option>
+                                <option value="NOCHE">Noche</option>
                             </select>
                         </div>
                     </div>
@@ -173,7 +173,7 @@
 
                         <!-- Dispositivos cargados en la pagina -->
                         <tbody>
-                            <tr th:each="curso: ${lista}">
+                            <tr th:each="curso: ${listaTitulo}"> <!-- aca poner el nombre del buscador-->
                                 <th scope="row" th:text="${curso.id}"></th>
                                 <td th:text="${curso.titulo}"></td>
                                 <td th:text="${curso.profesor}"></td> 

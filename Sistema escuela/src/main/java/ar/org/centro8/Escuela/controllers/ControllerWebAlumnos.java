@@ -3,12 +3,15 @@
 
 package ar.org.centro8.Escuela.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import ar.org.centro8.Escuela.entities.Alumno;
 import ar.org.centro8.Escuela.repositories.AlumnoRepository;
@@ -18,7 +21,7 @@ import ar.org.centro8.Escuela.repositories.CursoRepository;
 
 
 @Controller
-public class ControllerWeb { //Con este controler decido que se publica y que no, es importante para seguridad
+public class ControllerWebAlumnos { //Con este controler decido que se publica y que no, es importante para seguridad
 
     @Autowired //se va a engargar de fabricar todo el objeto y guardarlo automaticamente
     private AlumnoRepository ar;
@@ -27,8 +30,7 @@ public class ControllerWeb { //Con este controler decido que se publica y que no
     private CursoRepository cr;
 
     private String mensajeAlumno="Ingrese un nuevo alumno!";//quiero que la web muestre este mensaje
-    private String mensajeCurso="Ingrese un nuevo curso!";//quiero que la web muestre este mensaje
-    
+
     @GetMapping("/")
     public String getIndex(Model model) {
         //dr.findAll().forEach(System.out::println); esto es para ver la base de datos en la consola
@@ -51,7 +53,9 @@ public class ControllerWeb { //Con este controler decido que se publica y que no
     */
 
     @GetMapping("/alumnos")
-    public String getAlumno(Model model) {
+    public String getAlumno(
+        @RequestParam(name="buscarAlumno",required = false , defaultValue = "") String buscarAlumno,
+        Model model) {
         //dr.findAll().forEach(System.out::println); esto es para ver la base de datos en la consola
         model.addAttribute("mensajeAlumno", mensajeAlumno);
         //model.addAttribute("mensaje", mensaje);
@@ -59,28 +63,19 @@ public class ControllerWeb { //Con este controler decido que se publica y que no
         model.addAttribute("alumno",new Alumno());
 
         model.addAttribute("lista", ar.findAll());
-        model.addAttribute("listaCurso", cr.findAll());
+        model.addAttribute("listaCurso", ((List<Curso>) cr.findAll()));
         //lo comentarie, pero me sirve para listar todos los alumnos?
+
+        model.addAttribute("listaApellido", ((List<Alumno>) ar.findAll())
+            .stream()
+            .filter(a -> a.getApellido().toLowerCase().contains(buscarAlumno.toLowerCase()))
+            .toList());
     
         
         return "alumnos";
     }
 
-    @GetMapping("/cursos")
-    public String getCurso(Model model) {
-        //dr.findAll().forEach(System.out::println); esto es para ver la base de datos en la consola
-        model.addAttribute("mensajeCurso", mensajeCurso);
-        //model.addAttribute("mensaje", mensaje);
-        //bajo el nombre "mensaje" yo estoy autorizando a que se vea la variable "mensaje" en el frontend
-        model.addAttribute("curso",new Curso());
 
-        model.addAttribute("lista", cr.findAll());
-        //tengo un problema con esto, despues lo arreglo
-        
-    
-        
-        return "cursos";
-    }
     
     @PostMapping("/saveAlumno")
     public String save(@ModelAttribute Alumno alumno){
@@ -97,25 +92,7 @@ public class ControllerWeb { //Con este controler decido que se publica y que no
             mensajeAlumno="no se pudo guardar el alumno";
         };
 
-        return "redirect:";
-    }
-
-    @PostMapping("/saveCurso")
-    public String save(@ModelAttribute Curso curso){
-        
-        System.out.println("*****************************************************");
-        System.out.println(curso); //para ver en consola si esta bien guardado
-        System.out.println("*****************************************************");
-        // dispositivo.setId(0);
-        cr.save(curso);
-
-        if(curso.getId()>0){
-            mensajeCurso="se guardo el Curso con ID:"+curso.getId()+"!";
-        }else{
-            mensajeCurso="no se pudo guardar el curso";
-        };
-
-        return "redirect:";
+        return "redirect:alumnos";
     }
     
 }

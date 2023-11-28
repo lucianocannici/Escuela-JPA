@@ -13,17 +13,17 @@ import jakarta.persistence.Table;
 // me las da JAVAEE o JakartaEE
 
 @Entity //esta es una entidad de percistencia
-@Table(name="Cursos") //los obj de esta clase se guardan en la tabla Cursos, si no existe se crea automaticamente
+@Table(name="cursos") //los obj de esta clase se guardan en la tabla Cursos, si no existe se crea automaticamente
 public class Curso {
 
     @Id //este campo es primary key
     @GeneratedValue(strategy = GenerationType.IDENTITY) //este campo es auto_incremental
     @Column(unique = true, nullable = false)
-    Integer id; //no uso int, no uso primitivos
-    String titulo;
-    String profesor;
-    Dia dia;
-    Turno turno;
+    private Integer id; //no uso int, no uso primitivos
+    private String titulo;
+    private String profesor;
+    private Dia dia;
+    private Turno turno;
 
 
         //estaba esto en el curso de ejemplo, asi que lo dejo anotado por aca por si me sirve

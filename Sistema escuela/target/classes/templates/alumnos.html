@@ -62,7 +62,7 @@
 
                     <!-- Buscador -->
                     <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" name="buscar"
+                        <input class="form-control me-2" type="search" placeholder="Search" name="buscarAlumno"
                             aria-label="Search">
                         <button class="btn btn-outline-success" type="submit">Search</button>
                     </form>
@@ -126,8 +126,8 @@
                             <select class="form-select text-primary" th:field="*{idCurso}"
                                 aria-label="Default select example" id="idCurso" name="idCurso"
                                 >
-                                <option value='0' selected>Seleccione Curso</option>
-                                <option th:each="alumnos: ${listaCurso}" value="${curso.id}" selected></option>
+                                <!-- <option value='0' selected>Seleccione Curso</option>-->
+                                <option th:each="curso: ${listaCurso}" th:value="${curso.id}"  th:text="${curso.id+', '+curso.titulo+', '+curso.profesor+', '+curso.dia+', '+curso.turno}"></option>
                                 <!-- +"${curso.titulo}"+", "+"${curso.profesor}"+", "+"${curso.dia}"+", "+"${curso.turno}"-->
 
                                 <!-- aca debo crear la funcion CURSOS
@@ -187,12 +187,12 @@
 
                         <!-- Dispositivos cargados en la pagina -->
                         <tbody>
-                            <tr th:each="alumno: ${lista}">
+                            <tr th:each="alumno: ${listaApellido}">
                                 <th scope="row" th:text="${alumno.id}"></th>
                                 <td th:text="${alumno.nombre}"></td>
                                 <td th:text="${alumno.apellido}"></td> 
                                 <td th:text="${alumno.edad}"></td>
-                                <td th:text="${alumno.curso}"></td>
+                                <td th:text="${alumno.idCurso}"></td>
                             </tr>
                         </tbody>
                     </table>

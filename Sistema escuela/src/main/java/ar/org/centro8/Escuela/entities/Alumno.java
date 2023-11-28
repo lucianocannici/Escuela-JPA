@@ -1,26 +1,39 @@
 package ar.org.centro8.Escuela.entities;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 //pongo ciertas anotaciones que ayudan al mapeo de la base de datos, en vez de poner uno por uno usamos esto para agilizar todo
 // me las da JAVAEE o JakartaEE
 
 @Entity //esta es una entidad de percistencia
-@Table(name="Alumnos") //los obj de esta clase se guardan en la tabla Alumnos, si no existe se crea automaticamente
+@Table(name="alumnos") //los obj de esta clase se guardan en la tabla Alumnos, si no existe se crea automaticamente
 public class Alumno {
 
     @Id //este campo es primary key
     @GeneratedValue(strategy = GenerationType.IDENTITY) //este campo es auto_incremental
     @Column(unique = true, nullable = false)
-    Integer id; //no uso int, no uso primitivos
-    String nombre;
-    String apellido;
-    Integer edad;
-    Integer idCurso;
+    private Integer id; //no uso int, no uso primitivos
+    private String nombre;
+    private String apellido;
+    private Integer edad;
+    private Integer idCurso;
+
+    @OneToMany
+    @JoinColumn(name="idCurso") 
+    private List<Curso> cursos;
+
+
+
+
+//cascade = CascadeType.ALL, mappedBy = "idCursos"
 
 
         //estaba esto en el curso de ejemplo, asi que lo dejo anotado por aca por si me sirve
